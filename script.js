@@ -33,3 +33,35 @@ class Point {
         return `(${this.#_x}; ${this.#_y})`;
     }
 }
+
+class Rectangle {
+    #_leftTop;
+    #_rightBottom;
+
+    constructor(leftTop, rightBottom) {
+        this.#leftTop = leftTop;
+        this.#rightBottom = rightBottom;
+    }
+
+    get leftTop() {
+        return this.#_leftTop;
+    }
+
+    set #leftTop(value) {
+        if (!(value instanceof Point)) value = new Point(0, 0);
+        this.#_leftTop = value;
+    }
+
+    get rightBottom() {
+        return this.#_rightBottom;
+    }
+
+    set #rightBottom(value) {
+        if (!(value instanceof Point)) value = new Point(0, 0);
+        this.#_rightBottom = value;
+    }
+
+    toString() {
+        return `[${this.#_leftTop.toString()}, ${this.#_rightBottom.toString()}]`;
+    }
+}
