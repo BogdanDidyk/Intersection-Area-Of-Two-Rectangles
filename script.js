@@ -61,7 +61,24 @@ class Rectangle {
         this.#_rightBottom = value;
     }
 
+    static getIntersectionAreaOfRectangles(rect1, rect2) {
+        if (!(rect1 instanceof Rectangle) || !(rect2 instanceof Rectangle)) return NaN;
+
+        const left = Math.max(rect1.leftTop.x, rect2.leftTop.x);
+        const right = Math.min(rect1.rightBottom.x, rect2.rightBottom.x);
+        const top = Math.max(rect1.leftTop.y, rect2.leftTop.y);
+        const bottom = Math.min(rect1.rightBottom.y, rect2.rightBottom.y);
+
+        if (left < right && top < bottom) return (right - left) * (bottom - top);
+        else return 0;
+    }
+
     toString() {
         return `[${this.#_leftTop.toString()}, ${this.#_rightBottom.toString()}]`;
     }
 }
+
+const rect1 = new Rectangle(new Point(0, 1), new Point(5, 4));
+const rect2 = new Rectangle(new Point(2, 1), new Point(4, 6));
+const area = Rectangle.getIntersectionAreaOfRectangles(rect1, rect2);
+console.log(`rect1 = ${rect1}\nrect2 = ${rect2}\narea = ${area}`);
